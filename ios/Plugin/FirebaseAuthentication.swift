@@ -164,23 +164,28 @@ public typealias AuthStateChangedObserver = () -> Void
             self.savedCall?.resolve(result)
             return
         }
-        let familyName = fullName.familyName!.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-        let displayName = "\(fullName.givenName!) \(familyName)"
-        print("display name: \(displayName)")
-        let changeRequest = user.createProfileChangeRequest()
-        changeRequest.displayName = displayName
-        changeRequest.commitChanges { error in
-            if let error = error {
-                print("cant update display name")
-                self.savedCall?.resolve(result)
-                return
-            }
-            else {
-                if let updatedUser = Auth.auth().currentUser {
-                    print("sucess updating display name")
+        if let givenName = fullName.givenName, let familyName = fullName.familyName {
+            let familyName = fullName.familyName!.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            let displayName = "\(fullName.givenName!) \(familyName)"
+            print("display name: \(displayName)")
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = displayName
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("cant update display name")
                     self.savedCall?.resolve(result)
+                    return
+                }
+                else {
+                    if let updatedUser = Auth.auth().currentUser {
+                        print("sucess updating display name")
+                        self.savedCall?.resolve(result)
+                    }
                 }
             }
+        }else{
+            print("Invalid names")
+            self.savedCall?.resolve(result)
         }
     }
     
