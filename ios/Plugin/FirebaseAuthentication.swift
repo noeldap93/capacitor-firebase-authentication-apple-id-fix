@@ -151,7 +151,7 @@ public typealias AuthStateChangedObserver = () -> Void
                 credential: credential, user: user, idToken: idToken, nonce: nonce,
                 fullName: fullName
             )
-            if let fullName = fullName, let givenName = fullName.givenName, let familyName = fullName.familyName {
+            if let fullName = fullName {
                 self.updateCurrentUser(user: user, result: result, fullName: fullName)
             }else{
                 savedCall.resolve(result)

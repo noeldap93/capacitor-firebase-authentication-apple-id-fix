@@ -1,5 +1,5 @@
 {
-  "name": "@robingenz/capacitor-firebase-authentication",
+  "name": "@noeldap93/capacitor-firebase-authentication",
   "version": "0.4.4",
   "description": "Capacitor plugin for Firebase Authentication.",
   "main": "dist/plugin.cjs.js",
@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robingenz/capacitor-firebase-authentication.git"
+    "url": "git+https://github.com/noeldap93/capacitor-firebase-authentication-apple-id-fix.git"
   },
   "bugs": {
-    "url": "https://github.com/robingenz/capacitor-firebase-authentication/issues"
+    "url": "https://github.com/noeldap93/capacitor-firebase-authentication-apple-id-fix/issues"
   },
   "keywords": [
     "capacitor",
@@ -43,6 +43,9 @@
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build",
     "release": "standard-version"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "devDependencies": {
     "@capacitor/android": "3.4.0",
