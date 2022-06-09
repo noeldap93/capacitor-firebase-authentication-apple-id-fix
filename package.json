@@ -1,6 +1,6 @@
 {
   "name": "@noeldap93/capacitor-firebase-authentication",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Robingenz Capacitor plugin for Firebase Authentication. Modified to update firebase user display name",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
