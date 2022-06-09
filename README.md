@@ -1,27 +1,15 @@
-## ⚠️ Deprecated repository
-
-**This project has been moved to the following monorepo: [robingenz/capacitor-firebase](https://github.com/robingenz/capacitor-firebase).**
-
------
 
 <p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
 <h3 align="center">Firebase Authentication</h3>
-<p align="center"><strong><code>@robingenz/capacitor-firebase-authentication</code></strong></p>
+<p align="center"><strong><code>@noeldap93/capacitor-firebase-authentication</code></strong></p>
 <p align="center">
-  Capacitor plugin for Firebase Authentication.
+  Modified Robingenz Capacitor plugin for Firebase Authentication.  (@robingenz/capacitor-firebase-authentication)
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/maintenance/yes/2022?style=flat-square" />
-  <a href="https://github.com/robingenz/capacitor-firebase-authentication/actions?query=workflow%3A%22CI%22"><img src="https://img.shields.io/github/workflow/status/robingenz/capacitor-firebase-authentication/CI/main?style=flat-square" /></a>
-  <a href="https://www.npmjs.com/package/@robingenz/capacitor-firebase-authentication"><img src="https://img.shields.io/npm/l/@robingenz/capacitor-firebase-authentication?style=flat-square" /></a>
-<br>
-  <a href="https://www.npmjs.com/package/@robingenz/capacitor-firebase-authentication"><img src="https://img.shields.io/npm/dw/@robingenz/capacitor-firebase-authentication?style=flat-square" /></a>
-  <a href="https://www.npmjs.com/package/@robingenz/capacitor-firebase-authentication"><img src="https://img.shields.io/npm/v/@robingenz/capacitor-firebase-authentication?style=flat-square" /></a>
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<a href="#contributors-"><img src="https://img.shields.io/badge/all%20contributors-1-orange?style=flat-square" /></a>
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+  This repo includes the firebase user display name update from the Apple Id login credential. 
 </p>
+
 
 ## Maintainers
 
@@ -32,7 +20,7 @@
 ## Installation
 
 ```
-npm install @robingenz/capacitor-firebase-authentication firebase
+npm install @noeldap93/capacitor-firebase-authentication firebase
 npx cap sync
 ```
 

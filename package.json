@@ -1,7 +1,7 @@
 {
   "name": "@noeldap93/capacitor-firebase-authentication",
-  "version": "0.4.4",
-  "description": "Capacitor plugin for Firebase Authentication.",
+  "version": "0.4.5",
+  "description": "Robingenz Capacitor plugin for Firebase Authentication. Modified to update firebase user display name",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "RobingenzCapacitorFirebaseAuthentication.podspec"
+    "Noeldap93CapacitorFirebaseAuthentication.podspec"
   ],
   "author": "Robin Genz <mail@robingenz.dev>",
   "license": "MIT",
