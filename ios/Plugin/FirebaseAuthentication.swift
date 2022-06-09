@@ -108,10 +108,11 @@ public typealias AuthStateChangedObserver = () -> Void
                 return
             }
             let user = self.getCurrentUser()
-            let result = FirebaseAuthenticationHelper.createSignInResult(credential: nil, user: user, idToken: nil, nonce: nil)
+            let result = FirebaseAuthenticationHelper.createSignInResult(credential: nil, user: user, idToken: nil, nonce: nil, fullName: nil)
             savedCall.resolve(result)
         }
     }
+    
 
     @objc func signOut(_ call: CAPPluginCall) {
         do {
@@ -128,12 +129,12 @@ public typealias AuthStateChangedObserver = () -> Void
         Auth.auth().useAppLanguage()
     }
 
-    func handleSuccessfulSignIn(credential: AuthCredential, idToken: String?, nonce: String?) {
+    func handleSuccessfulSignIn(credential: AuthCredential, idToken: String?, nonce: String?, fullName: PersonNameComponents?) {
         if config.skipNativeAuth == true {
             guard let savedCall = self.savedCall else {
                 return
             }
-            let result = FirebaseAuthenticationHelper.createSignInResult(credential: credential, user: nil, idToken: idToken, nonce: nonce)
+            let result = FirebaseAuthenticationHelper.createSignInResult(credential: credential, user: nil, idToken: idToken, nonce: nonce, fullName: fullName)
             savedCall.resolve(result)
             return
         }
@@ -146,11 +147,43 @@ public typealias AuthStateChangedObserver = () -> Void
                 return
             }
             let user = self.getCurrentUser()
-            let result = FirebaseAuthenticationHelper.createSignInResult(credential: credential, user: user, idToken: idToken, nonce: nonce)
-            savedCall.resolve(result)
+            let result = FirebaseAuthenticationHelper.createSignInResult(
+                credential: credential, user: user, idToken: idToken, nonce: nonce,
+                fullName: fullName
+            )
+            if let fullName = fullName, let givenName = fullName.givenName, let familyName = fullName.familyName {
+                self.updateCurrentUser(user: user, result: result, fullName: fullName)
+            }else{
+                savedCall.resolve(result)
+            }
         }
     }
-
+    
+    func updateCurrentUser(user:User? ,result:JSObject, fullName:PersonNameComponents ){
+        guard let user = user else{
+            self.savedCall?.resolve(result)
+            return
+        }
+        let familyName = fullName.familyName!.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+        let displayName = "\(fullName.givenName!) \(familyName)"
+        print("display name: \(displayName)")
+        let changeRequest = user.createProfileChangeRequest()
+        changeRequest.displayName = displayName
+        changeRequest.commitChanges { error in
+            if let error = error {
+                print("cant update display name")
+                self.savedCall?.resolve(result)
+                return
+            }
+            else {
+                if let updatedUser = Auth.auth().currentUser {
+                    print("sucess updating display name")
+                    self.savedCall?.resolve(result)
+                }
+            }
+        }
+    }
+    
     func handleFailedSignIn(message: String?, error: Error?) {
         guard let savedCall = self.savedCall else {
             return

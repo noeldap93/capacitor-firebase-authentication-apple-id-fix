@@ -4,12 +4,19 @@ import FirebaseCore
 import FirebaseAuth
 
 public class FirebaseAuthenticationHelper {
-    public static func createSignInResult(credential: AuthCredential?, user: User?, idToken: String?, nonce: String?) -> JSObject {
+    public static func createSignInResult(credential: AuthCredential?, user: User?, idToken: String?, nonce: String?, fullName: PersonNameComponents?) -> JSObject {
         let userResult = self.createUserResult(user)
         let credentialResult = self.createCredentialResult(credential, idToken: idToken, nonce: nonce)
         var result = JSObject()
         result["user"] = userResult
         result["credential"] = credentialResult
+        if let familyName = fullName?.familyName {
+            result["familyName"] = familyName
+        }
+        if let givenName = fullName?.givenName {
+            result["givenName"] = givenName
+        }
+        
         return result
     }
 

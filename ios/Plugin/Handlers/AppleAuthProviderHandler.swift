@@ -103,8 +103,21 @@ extension AppleAuthProviderHandler: ASAuthorizationControllerDelegate, ASAuthori
             print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
             return
         }
+        print("FirebaseAppleId checking fullName")
+        if let fullName = appleIDCredential.fullName {
+            if let givenName = fullName.givenName, let familyName = fullName.familyName {
+                print("FirebaseAppleId fullname.givenName: \(givenName)")
+                print("FirebaseAppleId fullname.familyName: \(familyName)")
+            }
+            else{
+                print("FirebaseAppleId no familyName or givenName provided");
+            }
+        }else{
+            print("FirebaseAppleId no fullname provided");
+        }
+        
         let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
-        self.pluginImplementation.handleSuccessfulSignIn(credential: credential, idToken: idTokenString, nonce: nonce)
+        self.pluginImplementation.handleSuccessfulSignIn(credential: credential, idToken: idTokenString, nonce: nonce, fullName: appleIDCredential.fullName)
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

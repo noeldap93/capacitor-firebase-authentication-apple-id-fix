@@ -31,7 +31,7 @@ class GoogleAuthProviderHandler: NSObject {
                 guard let idToken = authentication.idToken else { return }
 
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-                self.pluginImplementation.handleSuccessfulSignIn(credential: credential, idToken: idToken, nonce: nil)
+                self.pluginImplementation.handleSuccessfulSignIn(credential: credential, idToken: idToken, nonce: nil, fullName: nil)
             }
         }
 #endif
